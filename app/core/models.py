@@ -45,7 +45,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=255)
     time_minutes = models.IntegerField()
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     link = models.CharField(max_length=255, blank=True)
 
 
