@@ -7,7 +7,6 @@ from django.contrib.auth.models import (
 )  # noqa
 
 class UserManager(BaseUserManager):
-
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('User must have an email address')
@@ -17,17 +16,15 @@ class UserManager(BaseUserManager):
 
         return user
 
-
     def create_superuser(self, email, password):
         user = self.create_user(email, password)
         user.is_staff = True
         user.is_superuser = True
-
         user.save(using=self._db)
-
         return user
 
 class User(AbstractBaseUser, PermissionsMixin):
+
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
@@ -38,6 +35,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
 
 class Recipe(models.Model):
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
