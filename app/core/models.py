@@ -6,8 +6,8 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )  # noqa
 
-class UserManager(BaseUserManager):
 
+class UserManager(BaseUserManager):
 
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -15,7 +15,6 @@ class UserManager(BaseUserManager):
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
-
         return user
 
     def create_superuser(self, email, password):
@@ -25,8 +24,8 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class User(AbstractBaseUser, PermissionsMixin):
 
+class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
@@ -37,8 +36,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = "email"
 
-class Recipe(models.Model):
 
+class Recipe(models.Model):
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,

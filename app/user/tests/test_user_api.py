@@ -9,6 +9,8 @@ from rest_framework import status
 CREATE_USER_URL = reverse('user:create')
 TOKEN_URL = reverse('user:token')
 ME_URL = reverse('user:me')
+
+
 def create_user(**params):
     return get_user_model().objects.create_user(**params)
 
@@ -92,6 +94,8 @@ class PublicUserApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 class PrivateUserApiTests(TestCase):
+
+
     def setUp(self):
         self.user = create_user(
             email='test@example.com',
