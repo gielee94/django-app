@@ -14,7 +14,8 @@ from recipe.serializers import (
 )
 
 
-RECIPES_URL=reverse('recipe:recipe-list')
+RECIPES_URL = reverse('recipe:recipe-list')
+
 
 def detail_url(recipe_id):
     return reverse('recipe:recipe-detail', args=[recipe_id])
