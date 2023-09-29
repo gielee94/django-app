@@ -1,4 +1,4 @@
-FROM nginxinc/nginx-unprivileged:1.19-alpine
+FROM nginxinc/nginx-unprivileged:1-alpine
 LABEL maintainer="gielee.com"
 
 COPY ./default.conf.tpl /etc/nginx/default.conf.tpl
@@ -12,10 +12,10 @@ ENV APP_PORT=9000
 USER root
 
 RUN mkdir -p /vol/static && \
-    chmod -R 755 /vol && \
+    chmod 755 /vol/static && \
     touch /etc/nginx/conf.d/default.conf && \
-    chown -R nginx:nginx /etc/nginx/conf.d/default.conf && \
-    chmod -R +x /run.sh
+    chown nginx:nginx /etc/nginx/conf.d/default.conf && \
+    chmod +x /run.sh
 
 VOLUME /vol/static
 
