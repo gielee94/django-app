@@ -92,10 +92,10 @@ class PrivateIngredientsApiTests(TestCase):
         in1 = Ingredient.objects.create(user=self.user, name='Apples')
         in2 = Ingredient.objects.create(user=self.user, name='Turkey')
         recipe = Recipe.objects.create(
-            title = 'Apple Crumble',
-            time_minutes = 5,
-            price = Decimal('10.00'),
-            user = self.user,
+            title='Apple Crumble',
+            time_minutes=5,
+            price=Decimal('10.00'),
+            user=self.user,
         )
         recipe.ingredients.add(in1)
 
@@ -110,17 +110,17 @@ class PrivateIngredientsApiTests(TestCase):
         ing = Ingredient.objects.create(user=self.user, name='Eggs')
         Ingredient.objects.create(user=self.user, name='Cheese')
         recipe1 = Recipe.objects.create(
-            title = 'Egg Benedict',
-            time_minutes = 5,
-            price = Decimal('10.00'),
-            user = self.user,
+            title='Egg Benedict',
+            time_minutes=5,
+            price=Decimal('10.00'),
+            user=self.user,
         )
         recipe1.ingredients.add(ing)
         recipe2 = Recipe.objects.create(
-            title = 'Egg Benedict',
-            time_minutes = 5,
-            price = Decimal('10.00'),
-            user = self.user,
+            title='Egg Benedict',
+            time_minutes=5,
+            price=Decimal('10.00'),
+            user=self.user,
         )
         recipe2.ingredients.add(ing)
 

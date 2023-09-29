@@ -22,9 +22,8 @@ def detail_url(tag_id):
     return reverse('recipe:tag-detail', args=[tag_id])
 
 
-def create_user(email='user@example.com',password='testpass123'):
-    return get_user_model().objects.create_user(email,password)
-
+def create_user(email='user@example.com', password='testpass123'):
+    return get_user_model().objects.create_user(email, password)
 
 
 class PublicTagsApiTests(TestCase):
@@ -35,7 +34,7 @@ class PublicTagsApiTests(TestCase):
     def test_auth_required(self):
         res = self.client.get(TAGS_URL)
 
-        self.assertEqual(res.status_code,status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
 class PrivateTagsApiTests(TestCase):
@@ -46,14 +45,14 @@ class PrivateTagsApiTests(TestCase):
         self.client.force_authenticate(self.user)
 
     def test_retrieve_tags(self):
-        Tag.objects.create(user=self.user,name='Vegan')
-        Tag.objects.create(user=self.user,name='Dessert')
+        Tag.objects.create(user=self.user, name='Vegan')
+        Tag.objects.create(user=self.user, name='Dessert')
 
         res = self.client.get(TAGS_URL)
 
         tags = Tag.objects.all().order_by('-name')
-        serializer = TagSerializer(tags,many=True)
-        self.assertEqual(res.status_code,status.HTTP_200_OK)
+        serializer = TagSerializer(tags, many=True)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
 
     def test_tags_limited_to_user(self):
